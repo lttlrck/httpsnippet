@@ -27,7 +27,7 @@ module.exports = function (source, options) {
     headers: source.allHeaders
   }
 
-  code.push('@output("dataReq", { method:"'+source.method+'", path:"'+source.fullurl+'", timeout: 3000 }, "lower");')
+  code.push('@output("dataReq", { method:"'+source.method+'", path:"'+source.fullUrl+'", content: '+source.postData.text+', timeout: 3000 }, "lower");')
 
   return code.join()
 }
