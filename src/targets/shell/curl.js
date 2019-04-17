@@ -16,13 +16,13 @@ var CodeBuilder = require('../../helpers/code-builder')
 
 module.exports = function (source, options) {
   var opts = util._extend({
-    indent: '  ',
-    short: false
+    indent: false,
+    short: true
   }, options)
 
   var code = new CodeBuilder(opts.indent, opts.indent !== false ? ' \\\n' + opts.indent : ' ')
 
-  code.push('curl %s %s', opts.short ? '-X' : '--request', source.method)
+  code.push('curl -L %s %s', opts.short ? '-X' : '--request', source.method)
       .push(util.format('%s%s', opts.short ? '' : '--url ', helpers.quote(source.fullUrl)))
 
   if (source.httpVersion === 'HTTP/1.0') {
